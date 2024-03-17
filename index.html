@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			body {
+				margin: 0;
+				background-color: grey;
+				background-image: linear-gradient(-90deg, rgba(2, 2, 2, 0.356), darkgrey);
+				background-repeat: no-repeat;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				min-height: 100dvh;
+				color: snow;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			.parent {
+				display: grid;
+			}
+
+			@media (min-width: 800px) {
+				.parent {
+					grid-auto-flow: row;
+					grid-auto-columns: 1fr;
+
+					gap: 1rem;
+				}
+			}
+
+			.child:nth-child(2) {
+				padding: 1rem 2rem;
+			}
+
+			.child {
+				border: 1px solid black;
+			}
+
+			.outer {
+				display: grid;
+				grid-template-columns: 0.66fr 0.3333fr;
+			}
+
+			.slideshow {
+				display: flex;
+				width: 100dvi;
+				height: auto;
+				margin: auto;
+				overflow: auto;
+				scroll-snap-type: x mandatory;
+				scrollbar-color: red orange;
+				scrollbar-width: thin;
+				scroll-behavior: smooth;
+			}
+
+			/* https://developer.mozilla.org/en-US/play */
+
+			.slideshow img {
+				max-width: 100%;
+				display: block;
+			}
+
+			.slideshow img {
+				flex-shrink: 0;
+				scroll-snap-align: start;
+				scroll-snap-align: start;
+				aspect-ratio: 4 / 3;
+				object-fit: cover;
+			}
+
+			.slideshow-indicators {
+				display: flex;
+				justify-content: center;
+				gap: 1rem;
+				padding: 0.5rem;
+			}
+
+			.slideshow-indicators a {
+				text-decoration: none;
+				background-color: aquamarine;
+				width: 20px;
+				clip-path: circle(8px);
+			}
+
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100dvw;
+				background-color: rgba(238, 232, 170, 0.349);
+			}
+
+			footer ul {
+				padding: 0;
+				display: flex;
+				justify-content: space-evenly;
+				list-style: none;
+				gap: 12px;
+				font-weight: bold;
+				font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="slideshow">
+			<img id="one" src="https://place-hold.it/500x300.jpg/666/fff/000" />
+			<img id="two" src="https://place-hold.it/500x300.jpg/123/fff/000" />
+			<img id="three" src="https://place-hold.it/500x300.jpg/567/fff/000" />
+			<img id="four" src="https://place-hold.it/500x300.jpg/111/fff/000" />
+			<img id="five" src="https://place-hold.it/500x300.jpg/867/fff/000" />
+			<img id="six" src="https://place-hold.it/500x300.jpg/492/fff/000" />
+		</div>
+		<div class="slideshow-indicators">
+			<a href="#one" target="_self"><span>&nbsp;</span></a>
+			<a href="#two" target="_self"><span>&nbsp;</span></a>
+			<a href="#three" target="_self"><span>&nbsp;</span></a>
+			<a href="#four" target="_self"><span>&nbsp;</span></a>
+			<a href="#five" target="_self"><span>&nbsp;</span></a>
+			<a href="#six" target="_self"><span>&nbsp;</span></a>
+		</div>
+		<div>
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, magnam!</p>
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, voluptatum.</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore harum temporibus a nemo sapiente consectetur
+				adipisci tenetur dolore itaque. Laboriosam.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. At culpa sit ab voluptate illum temporibus fugiat nam
+				distinctio vero reiciendis?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, iusto vero eum consequuntur officiis nam porro.
+				Repellendus fugit blanditiis perspiciatis, optio repellat atque deserunt fugiat, officiis earum vero minus.
+				Magnam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, iusto vero eum consequuntur officiis nam porro.
+				Repellendus fugit blanditiis perspiciatis, optio repellat atque deserunt fugiat, officiis earum vero minus.
+				Magnam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, iusto vero eum consequuntur officiis nam porro.
+				Repellendus fugit blanditiis perspiciatis, optio repellat atque deserunt fugiat, officiis earum vero minus.
+				Magnam?
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, iusto vero eum consequuntur officiis nam porro.
+				Repellendus fugit blanditiis perspiciatis, optio repellat atque deserunt fugiat, officiis earum vero minus.
+				Magnam?
+			</p>
+		</div>
+		<footer>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+		</footer>
+
+		<script>
+			var lastScrollTop = 0;
+
+			// element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
+			window.addEventListener(
+				'scroll',
+				function () {
+					// or window.addEventListener("scroll"....
+					var st = window.pageYOffset || document.documentElement.scrollTop;
+					if (st > lastScrollTop) {
+						console.log('up');
+					} else if (st < lastScrollTop) {
+						console.log('down');
+					} // else was horizontal scroll
+					lastScrollTop = st <= 0 ? 0 : st;
+				},
+				false
+			);
+		</script>
+	</body>
+</html>
